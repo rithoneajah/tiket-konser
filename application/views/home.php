@@ -38,6 +38,11 @@
 										</strong>,<br><br>
 										Berusaha dan berdoa
 									</div>
+									<div style="padding-bottom:10px">
+										<center>
+											<img src="<?php echo base_url('assets/images/dashboard.jpg'); ?>" style="width:50%">
+										</center>
+									</div>
 									<div class="widget-header widget-header-flat widget-header-small">
 										<h5 class="widget-title">
 											<i class="ace-icon fa fa-signal"></i>
@@ -46,41 +51,37 @@
 									</div>
 									<br>
 									<div class="widget-body">
+										<center>
 										<div class="infobox infobox-green ">
 											<div class="infobox-icon">
-												<i class="ace-icon fa fa-comments"></i>
+												<i class="ace-icon fa fa-ticket"></i>
 											</div>
 											<div class="infobox-data">
-												<span class="infobox-data-number">0</span>
-												<div class="infobox-content">Komentar &nbsp;
-												+
-													<span class="label label-info arrowed-right arrowed-in">New</span>
+												<span class="infobox-data-number"><?=$typeCount;?></span>
+												<div class="infobox-content">Jenis Tiket
 												</div>
 											</div>
-												<div class="stat stat-success">4</div>
 										</div>
 										<div class="infobox infobox-red">
 											<div class="infobox-icon">
-												<i class="ace-icon fa fa-flask"></i>
+												<i class="ace-icon fa fa-ticket"></i>
 											</div>
 											<div class="infobox-data">
-												<span class="infobox-data-number">0</span>
-												<div class="infobox-content">Testimoni &nbsp;
-												+
-												<span class="label label-info arrowed-right arrowed-in">New</span>
+												<span class="infobox-data-number"><?=$tiketCount;?></span>
+												<div class="infobox-content">Tiket
 												</div>
 											</div>
-												<div class="stat stat-success">5</div>
 										</div>
 										<div class="infobox infobox-orange2">
 											<div class="infobox-icon">
-												<i class="ace-icon fa fa-download"></i>
+												<i class="ace-icon fa fa-users"></i>
 											</div>
 											<div class="infobox-data">
-												<span class="infobox-data-number">100</span>
-												<div class="infobox-content"><i>pageviews</i></div>
+												<span class="infobox-data-number"><?=$bookingCount;?></span>
+												<div class="infobox-content">Pemesan Tiket</div>
 											</div>
 										</div>
+										</center>
 									</div><!-- /.widget-body -->
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->

@@ -16,4 +16,15 @@ class kontak extends CI_Controller {
 
         $this->load->view('footer');
     }
+
+    public function tentang()
+    {
+      $nimNama = 'Ridwan Ardiansyah - 41516120063';
+      $this->load->view('header', ['user' => $nimNama]);
+      $this->load->view('menu');
+
+      $this->load->view('kontak/tentang', ['user' => $nimNama]);
+
+      $this->load->view('footer');
+    }
 }

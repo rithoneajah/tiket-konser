@@ -52,7 +52,8 @@ class tiket extends CI_Controller {
 
     public function daftar_type()
     {
-        echo $this->type_model->getData();
+        $data = $this->type_model->getData();
+        echo json_encode($data);
     }
 
     public function tiket_type($id)
@@ -317,17 +318,21 @@ class tiket extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function delete_type($id)
+    public function delete_type()
     {
+        $id = $this->input->post('id');
         /*mengambil data yang ada berdasarkan id*/
         $tiket = $this->type_model->getById($id)->result();
         $tiket = end($tiket);
 
+        /*hapus data child*/
+        $where = array('type' => $id);
+        $this->tiket_model->hapusData($where);
+
         /*menghapus data dari table database*/
         $where = array('id' => $id);
-        $this->type_model->hapusData($where);
-
-        redirect(base_url() . 'tiket');
+        $delete = $this->type_model->hapusData($where);
+        echo json_encode($delete);
     }
 
     public function proses_tambah_type()
@@ -340,8 +345,9 @@ class tiket extends CI_Controller {
 
         $data['type'] = $type;
 
-        $this->type_model->tambah($data);
-        redirect(base_url() . 'tiket');
+        $save = $this->type_model->tambah($data);
+        echo json_encode($save);
+        // redirect(base_url() . 'tiket');
     }
 
     public function proses_edit_type($id)
@@ -361,7 +367,16 @@ class tiket extends CI_Controller {
             'id' => $id
         ];
 
-        $this->type_model->updateData($where, $data);
-        redirect(base_url() . 'tiket');
+        $edit = $this->type_model->updateData($where, $data);
+        echo json_encode($edit);
+    }
+
+    public function detail()
+    {
+        $nimNama = 'Ridwan Ardiansyah - 41516120063';
+      $this->load->view('header', ['user' => $nimNama]);
+      $this->load->view('menu');
+      $this->load->view('tiket/detail');
+      $this->load->view('footer');
     }
 }

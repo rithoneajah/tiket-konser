@@ -25,7 +25,7 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <a class="btn btn-success" href="<?php echo base_url(); ?>tiket/tambah_type">Tambah Jenis Tiket</a>
+          <a class="btn btn-success" id="id-btn-dialog1">Tambah Jenis Tiket</a>
 
           <div class="clearfix">
             <div class="pull-right tableTools-container"></div>
@@ -48,6 +48,9 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
+              <tbody id="show_data">
+
+              </tbody>
             </table>
           </div>
         </div>
@@ -55,3 +58,29 @@
     </div>
   </div>
 </div>
+
+<div id="dialog-message" class="hide">
+<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="#">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <label for="jenis-tiket">Jenis Tiket</label>
+      <div>
+        <input type="text" id="jenis-tiket" placeholder="Jenis Tiket" name="type" class="col-xs-12" />
+      </div>
+    </div>
+  </div>
+</form>
+</div><!-- #dialog-message -->
+
+<div id="dialog-confirm" class="hide">
+  <div class="alert alert-info bigger-110">
+    Semua Data dibawah Jenis Tiket tersebut juga akan terhapus.
+  </div>
+
+  <div class="space-6"></div>
+
+  <p class="bigger-110 bolder center grey">
+    <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+    Apakah Anda Yakin?
+  </p>
+</div><!-- #dialog-confirm -->

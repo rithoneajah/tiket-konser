@@ -29,7 +29,7 @@
                 <div class="navbar-header pull-left">
                     <a href="<?php echo base_url(); ?>layout" class="navbar-brand">
                         <small>
-                            <i class="fa fa-leaf"></i>
+                            <i class="fa fa-ticket"></i>
                             Tiket Konser
                         </small>
                     </a>
@@ -39,7 +39,7 @@
                     <ul class="nav ace-nav">
                         <li class="light-blue dropdown-modal">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="<?php echo base_url('assets/images/avatars/user.jpg'); ?>" alt="Jason's Photo" />
+                                <img class="nav-user-photo" src="<?php echo base_url('assets/images/avatars/Monkey.jfif'); ?>" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Selamat datang,</small>
                                     <?=$user;?>

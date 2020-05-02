@@ -64,4 +64,8 @@ class booking_model extends CI_Model {
         $this->db->delete('booking');
     }
 
+    function hitung()
+    {
+        return $this->db->from("booking")->count_all_results();
+    }
 }

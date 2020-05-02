@@ -60,7 +60,7 @@ class tiket_model extends CI_Model {
 
     function hapusData($where) {
         $this->db->where($where);
-        $this->db->delete('tiket');
+        return $this->db->delete('tiket');
     }
 
     public function getDataType($id)
@@ -84,5 +84,10 @@ class tiket_model extends CI_Model {
         }
 
         echo json_encode($data);
+    }
+
+    function hitung()
+    {
+        return $this->db->from("tiket")->count_all_results();
     }
 }

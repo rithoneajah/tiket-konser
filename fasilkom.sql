@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `booking`
 --
 
-CREATE TABLE `booking` (
+CREATE TABLE IF NOT EXISTS `booking` (
   `id` int(11) NOT NULL,
   `id_tiket` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
@@ -51,7 +51,7 @@ INSERT INTO `booking` (`id`, `id_tiket`, `nama`, `email`, `no_telp`, `created_da
 -- Table structure for table `tiket`
 --
 
-CREATE TABLE `tiket` (
+CREATE TABLE IF NOT EXISTS `tiket` (
   `id` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `band` varchar(255) NOT NULL,
@@ -77,7 +77,7 @@ INSERT INTO `tiket` (`id`, `type`, `band`, `image`, `harga`, `date`, `time`) VAL
 -- Table structure for table `type`
 --
 
-CREATE TABLE `type` (
+CREATE TABLE IF NOT EXISTS `type` (
   `id` int(11) NOT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -123,20 +123,20 @@ ALTER TABLE `type`
 --
 -- AUTO_INCREMENT for table `booking`
 --
-ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+-- ALTER TABLE `booking`
+--   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tiket`
 --
-ALTER TABLE `tiket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+-- ALTER TABLE `tiket`
+--   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `type`
 --
-ALTER TABLE `type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+-- ALTER TABLE `type`
+--   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -145,15 +145,15 @@ ALTER TABLE `type`
 --
 -- Constraints for table `booking`
 --
-ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`id_tiket`) REFERENCES `tiket` (`id`);
+-- ALTER TABLE `booking`
+--   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`id_tiket`) REFERENCES `tiket` (`id`);
 
 --
 -- Constraints for table `tiket`
 --
-ALTER TABLE `tiket`
-  ADD CONSTRAINT `tiket_ibfk_1` FOREIGN KEY (`type`) REFERENCES `type` (`id`);
-COMMIT;
+-- ALTER TABLE `tiket`
+--   ADD CONSTRAINT `tiket_ibfk_1` FOREIGN KEY (`type`) REFERENCES `type` (`id`);
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

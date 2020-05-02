@@ -23,7 +23,7 @@ class type_model extends CI_Model {
             }
         }
 
-        echo json_encode($return);
+        return $return;
     }
 
     public function getData()
@@ -31,7 +31,7 @@ class type_model extends CI_Model {
         $i = 1;
         $groupproduct = $this->db->query("SELECT * FROM type");
         $data = [];
-        foreach($groupproduct->result() as $rowa) {
+        /*foreach($groupproduct->result() as $rowa) {
             $akses = "<center><a href='".base_url().'tiket/edit_type/'.$rowa->id."' class='tooltip-success' data-rel='tooltip' title='Ubah' ><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a>  <a href='".base_url().'tiket/delete_type/'.$rowa->id."' class='tooltip-error delete-data' data-rel='tooltip' title='Hapus' ><span class='red'><i class='ace-icon fa fa-trash-o bigger-120'></i></span></a></center>";
 
             $row = array();
@@ -42,9 +42,9 @@ class type_model extends CI_Model {
 
             $data['data'][] = $row;
             $i++;
-        }
+        }*/
 
-        echo json_encode($data);
+        return $groupproduct->result();
     }
 
     function getById($id){
@@ -53,16 +53,21 @@ class type_model extends CI_Model {
 
     function updateData($where, $data){
         $this->db->where($where);
-        $this->db->update('type', $data);
+        return $this->db->update('type', $data);
     }
 
     function hapusData($where) {
         $this->db->where($where);
-        $this->db->delete('type');
+        return $this->db->delete('type');
     }
 
     function getAll(){
         return $this->db->get('type');
+    }
+
+    function hitung()
+    {
+        return $this->db->from("type")->count_all_results();
     }
 
 }

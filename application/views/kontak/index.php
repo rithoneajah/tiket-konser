@@ -15,7 +15,7 @@
     <div class="page-content">
       <div class="page-header">
         <h1>
-          Contact Person
+          Kontak
         </h1>
       </div><!-- /.page-header -->
 
@@ -74,13 +74,18 @@
             <div class="profile-contact-info">
               <div class="profile-contact-links align-left">
                 <a href="#" class="btn btn-link">
-                  <i class="ace-icon fa fa-plus-circle bigger-120 green"></i>
-                  Add as a friend
+                  <i class="ace-icon fa fa-phone bigger-120 green"></i>
+                  +62123456789
                 </a>
 
                 <a href="#" class="btn btn-link">
                   <i class="ace-icon fa fa-envelope bigger-120 pink"></i>
                   Send a message
+                </a>
+
+                <a href="#" class="btn btn-link">
+                  <i class="ace-icon fa fa-home bigger-120 red"></i>
+                  jl. Meruya Selatan no. 1, Kembangan, Jakarta Barat
                 </a>
 
               </div>

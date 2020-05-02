@@ -10,45 +10,190 @@
   </p>
 </div><!-- #dialog-confirm -->
 <script type="text/javascript">
-$(document).ready(function() {
-  var myTable =$('#dynamic-table').DataTable({
-    "ajax": {
-      type   : "POST",
-      url    : "<?php echo base_url(); ?>tiket/daftar_type/",
-      data   : function(d) {
-          
+jQuery(function($) {
+  // document.querySelector("#dynamic-table > tbody > tr.even > td:nth-child(6) > center > a.delete-data")
+  $('#dynamic-table tbody .delete-data').on( 'click', function() {
+    console.log('washyu');
+  });
+  $(document).ready(function() {
+    show_data();
+    var myTable =$('#dynamic-table').DataTable({
+      /*"ajax": {
+        type   : "POST",
+        url    : "<?php echo base_url(); ?>tiket/daftar_type/",
+        data   : function(d) {
+            
+        }
+      },*/
+      "columnDefs": [
+        { "orderable": false, "targets": 2 },
+        { "visible": true, "targets": [3], "searchable": false }
+      ],
+      select: {
+          style: 'multi'
+      },
+      "initComplete" : function(setting, json) {
+        $('.delete-data').on('click', function(e) {
+          var link = $(this).attr('href');
+          e.preventDefault();
+          $( "#dialog-confirm" ).removeClass('hide').dialog({
+            resizable: false,
+            width: '320',
+            modal: true,
+            title: "Konfirmasi",
+            title_html: true,
+            buttons: [
+              {
+                html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Hapus",
+                "class" : "btn btn-danger btn-minier",
+                click: function() {
+                  console.log(link);
+                  $( this ).dialog( "close" );
+                  window.location.href = link;
+                }
+              }
+              ,
+              {
+                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Jangan",
+                "class" : "btn btn-minier",
+                click: function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            ]
+          });
+        });
       }
-    },
-    "columnDefs": [
-      { "orderable": false, "targets": 2 },
-      { "visible": true, "targets": [3], "searchable": false }
-    ],
-    select: {
-        style: 'multi'
-    },
-    "initComplete" : function(setting, json) {
-      $('.delete-data').on('click', function(e) {
-        var link = $(this).attr('href');
-        e.preventDefault();
-        $( "#dialog-confirm" ).removeClass('hide').dialog({
+    });
+
+    function show_data() {
+      $.ajax({
+        type  : 'ajax',
+        url   : '<?php echo site_url('tiket/daftar_type')?>',
+        async : true,
+        dataType : 'json',
+        success : function(data){
+          var html = '';
+          var i;
+          for(i=0; i<data.length; i++){
+            html += '<tr>'+
+                    '<td>'+(i+1)+'</td>'+
+                    '<td>'+data[i].type+'</td>'+
+                    '<td><a href="<?php echo site_url('tiket/type/')?>' + data[i].id + '" class="tooltip-success" data-rel="tooltip" title="Daftar Tiket" ><span class="blue">Daftar Tiket <i class="ace-icon fa fa-book bigger-120"></i></span></a></td>'+
+                    '<td><center>'+
+                        '<a href="#" class="tooltip-success edit-data" data-rel="tooltip" title="Ubah"  data-type="'+data[i].type+'" data-id="'+data[i].id+'"><span class="green"><i class="ace-icon fa fa-pencil-square-o bigger-120"></i></span></a>'+' '+
+                        '<a href="#" class="tooltip-error hapus-data" data-id="'+data[i].id+'" data-rel="tooltip" title="Hapus"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a>'+
+                    '</center></td>'+
+                    '</tr>';
+          }
+          $('#show_data').html(html);
+        }
+
+      });
+    }
+    /** modal dialog tambah jenis tiket */		
+    $( "#id-btn-dialog1" ).on('click', function(e) {
+            e.preventDefault();
+      var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
+        modal: true,
+        title: "Tambah Jenis Tiket",
+        title_html: true,
+        buttons: [ 
+          {
+            text: "Cancel",
+            "class" : "btn btn-minier",
+            click: function() {
+              $( this ).dialog( "close" ); 
+            } 
+          },
+          {
+            text: "OK",
+            "class" : "btn btn-primary btn-minier",
+            click: function() {
+              var jenis = $('#jenis-tiket').val();
+              $.ajax({
+                type : "POST",
+                url  : "<?php echo site_url('tiket/proses_tambah_type')?>",
+                dataType : "JSON",
+                data : {type:jenis},
+                success: function(data){
+                  $('[name="type"]').val("");
+                  show_data();
+                }
+              });
+              $( this ).dialog( "close" );
+              return false;
+            } 
+          }
+        ]
+      });
+
+      /**
+      dialog.data( "uiDialog" )._title = function(title) {
+        title.html( this.options.title );
+      };
+      **/
+    });
+  });
+
+  $( document ).ajaxComplete(function() {
+    function show_data() {
+      $.ajax({
+        type  : 'ajax',
+        url   : '<?php echo site_url('tiket/daftar_type')?>',
+        async : true,
+        dataType : 'json',
+        success : function(data){
+          var html = '';
+          var i;
+          for(i=0; i<data.length; i++){
+            html += '<tr>'+
+                    '<td>'+(i+1)+'</td>'+
+                    '<td>'+data[i].type+'</td>'+
+                    '<td><a href="<?php echo site_url('tiket/type/')?>' + data[i].id + '" class="tooltip-success" data-rel="tooltip" title="Daftar Tiket" ><span class="blue">Daftar Tiket <i class="ace-icon fa fa-book bigger-120"></i></span></a></td>'+
+                    '<td><center>'+
+                        '<a href="#" class="tooltip-success edit-data" data-rel="tooltip" title="Ubah" data-type="'+data[i].type+'" data-id="'+data[i].id+'"><span class="green"><i class="ace-icon fa fa-pencil-square-o bigger-120"></i></span></a>'+' '+
+                        '<a href="#" class="tooltip-error hapus-data" data-id="'+data[i].id+'" data-rel="tooltip" title="Hapus"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a>'+
+                    '</center></td>'+
+                    '</tr>';
+          }
+          $('#show_data').html(html);
+        }
+
+      });
+    }
+
+    $( ".hapus-data" ).on('click', function(e) {
+      e.preventDefault();
+      var id = $(this).data('id');
+      $( "#dialog-confirm" ).removeClass('hide').dialog({
           resizable: false,
           width: '320',
           modal: true,
-          title: "Konfirmasi",
+          title: "Hapus Jenis Tiket dan Isinya",
           title_html: true,
           buttons: [
             {
-              html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Hapus",
+              html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete all items",
               "class" : "btn btn-danger btn-minier",
               click: function() {
-                console.log(link);
+                console.log(id);
+                $.ajax({
+                  type : "POST",
+                  url  : "<?php echo site_url('tiket/delete_type')?>",
+                  dataType : "JSON",
+                  data : {id:id},
+                  success: function(data){
+                    show_data();
+                  }
+                });
                 $( this ).dialog( "close" );
-                window.location.href = link;
+                return false;
               }
             }
             ,
             {
-              html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Jangan",
+              html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancel",
               "class" : "btn btn-minier",
               click: function() {
                 $( this ).dialog( "close" );
@@ -56,16 +201,55 @@ $(document).ready(function() {
             }
           ]
         });
-      });
-    }
-  });
-
-});
-  jQuery(function($) {
-    
-    // document.querySelector("#dynamic-table > tbody > tr.even > td:nth-child(6) > center > a.delete-data")
-    $('#dynamic-table tbody .delete-data').on( 'click', function() {
-      console.log('washyu');
     });
-  })
+
+    $( ".edit-data" ).on('click', function(e) {
+      e.preventDefault();
+      var jenis = $(this).data('type');
+      var id = $(this).data('id');
+      $('#jenis-tiket').val(jenis);
+
+      var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
+        modal: true,
+        title: "Tambah Jenis Tiket",
+        title_html: true,
+        buttons: [ 
+          {
+            text: "Cancel",
+            "class" : "btn btn-minier",
+            click: function() {
+              $( this ).dialog( "close" ); 
+            } 
+          },
+          {
+            text: "OK",
+            "class" : "btn btn-primary btn-minier",
+            click: function() {
+              var jenis = $('#jenis-tiket').val();
+              $.ajax({
+                type : "POST",
+                url  : "<?php echo site_url('tiket/proses_edit_type/')?>" + id,
+                dataType : "JSON",
+                data : {type:jenis},
+                success: function(data){
+                  $('[name="type"]').val("");
+                  show_data();
+                }
+              });
+              $( this ).dialog( "close" );
+              return false;
+            } 
+          }
+        ]
+      });
+
+      /**
+      dialog.data( "uiDialog" )._title = function(title) {
+        title.html( this.options.title );
+      };
+      **/
+    });
+  });
+  
+});
 </script>
