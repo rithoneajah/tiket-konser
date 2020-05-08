@@ -68,7 +68,7 @@ jQuery(function($) {
 
     function show_data() {
       $.ajax({
-        type  : 'ajax',
+        type  : 'get',
         url   : '<?php echo site_url('tiket/daftar_type')?>',
         async : true,
         dataType : 'json',
@@ -139,7 +139,7 @@ jQuery(function($) {
   $( document ).ajaxComplete(function() {
     function show_data() {
       $.ajax({
-        type  : 'ajax',
+        type  : 'get',
         url   : '<?php echo site_url('tiket/daftar_type')?>',
         async : true,
         dataType : 'json',

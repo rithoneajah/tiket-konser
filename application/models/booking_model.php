@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
-class booking_model extends CI_Model {
+class Booking_model extends CI_Model {
      
     public function __construct()
     {
@@ -67,5 +67,12 @@ class booking_model extends CI_Model {
     function hitung()
     {
         return $this->db->from("booking")->count_all_results();
+    }
+
+    public function chartBand()
+    {
+        $sql = "SELECT tiket.band, COUNT(id_tiket) AS jml FROM `booking` JOIN `tiket` ON tiket.id = booking.id_tiket GROUP BY id_tiket";
+        $query = $this->db->query($sql);
+        return $query->result_array();
     }
 }

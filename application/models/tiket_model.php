@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
-class tiket_model extends CI_Model {
+class Tiket_model extends CI_Model {
      
     public function __construct()
     {

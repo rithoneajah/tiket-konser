@@ -41,9 +41,18 @@
 
                 <ul class="nav nav-list">
                     <li class="active">
-                        <a href="<?php echo base_url(); ?>layout">
+                        <a href="<?php echo base_url('layout'); ?>">
                             <i class="menu-icon fa fa-tachometer"></i>
                             <span class="menu-text"> Dashboard </span>
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="<?php echo base_url('statistik'); ?>">
+                            <i class="menu-icon glyphicon glyphicon-signal"></i>
+                            <span class="menu-text"> Statistik </span>
                         </a>
 
                         <b class="arrow"></b>

@@ -12,6 +12,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/ace-rtl.min.css');?>">
     <script type="text/javascript" src="<?php echo base_url('assets/js/ace-extra.min.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-2.1.4.min.js');?>"></script>
+<!-- FusionCharts Library -->
+<script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
 </head>
     <body class="no-skin">
         <div id="navbar" class="navbar navbar-default          ace-save-state">
