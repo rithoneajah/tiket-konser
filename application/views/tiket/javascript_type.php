@@ -184,6 +184,11 @@ jQuery(function($) {
                   dataType : "JSON",
                   data : {id:id},
                   success: function(data){
+                    console.log(data);
+                    if (data == false) {
+                      $('.ajax-res').removeClass('hide');
+                    }
+
                     show_data();
                   }
                 });

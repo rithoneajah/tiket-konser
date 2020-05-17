@@ -8,7 +8,7 @@ class Tiket extends CI_Controller {
         $this->load->model('tiket_model');
         $this->load->model('booking_model');
         $this->load->model('type_model');
-
+        $this->load->library('session');
     }
 
     public function type($id)
@@ -91,15 +91,21 @@ class Tiket extends CI_Controller {
         $tiket = $this->tiket_model->getById($id)->result();
         $tiket = end($tiket);
 
-        /*cek apakah data terdapat gambar*/
-        if (!empty($tiket->image) && file_exists('uploads/'.$tiket->image)) {
-            /*jika gambar ada di storage maka akan dihapus*/
-            unlink('./uploads/'.$tiket->image);
-        }
+        $booking = $this->booking_model->getTiketId($id)->result();
+        $booking = end($booking);
+        if (empty($booking)) {
+            /*cek apakah data terdapat gambar*/
+            if (!empty($tiket->image) && file_exists('uploads/'.$tiket->image)) {
+                /*jika gambar ada di storage maka akan dihapus*/
+                unlink('./uploads/'.$tiket->image);
+            }
 
-        /*menghapus data dari table database*/
-        $where = array('id' => $id);
-        $this->tiket_model->hapusData($where);
+            /*menghapus data dari table database*/
+            $where = array('id' => $id);
+            $this->tiket_model->hapusData($where);
+        } else {
+            $this->session->set_flashdata('gagal',1);
+        }
 
         redirect(base_url() . 'tiket');
     }
@@ -325,13 +331,17 @@ class Tiket extends CI_Controller {
         $tiket = $this->type_model->getById($id)->result();
         $tiket = end($tiket);
 
-        /*hapus data child*/
-        $where = array('type' => $id);
-        $this->tiket_model->hapusData($where);
+        $type = $this->tiket_model->getTypeId($id)->result();
+        $type = end($type);
+        if (empty($type)) {
 
-        /*menghapus data dari table database*/
-        $where = array('id' => $id);
-        $delete = $this->type_model->hapusData($where);
+            /*menghapus data dari table database*/
+            $where = array('id' => $id);
+            $delete = $this->type_model->hapusData($where);
+
+        } else {
+            $delete = false;
+        }
         echo json_encode($delete);
     }
 

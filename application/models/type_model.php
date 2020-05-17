@@ -11,8 +11,9 @@ class Type_model extends CI_Model {
     public function tambah($data)
     {
         if (!empty($data)) {
-            if($this->db->simple_query("INSERT INTO `type`(`type`)
-                VALUES ('$data[type]')")) {
+            $id = hexdec(uniqid());
+            if($this->db->simple_query("INSERT INTO `type`(`id`, `type`)
+                VALUES ('$id', '$data[type]')")) {
                 $return['msg'][0] = "ok";
                 $return['msg'][1] = "Data berhasil ditambahkan.....";
             } else {

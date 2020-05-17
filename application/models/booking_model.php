@@ -11,9 +11,10 @@ class Booking_model extends CI_Model {
     public function tambah($data)
     {
         if (!empty($data)) {
+            $id = hexdec(uniqid());
             $tanggal = date('Y-m-d');
-            if($this->db->simple_query("INSERT INTO `booking`(`id_tiket`, `nama`, `email`, `no_telp`, `created_date`)
-                VALUES ('$data[id_tiket]', '$data[nama]', '$data[email]', '$data[no_telp]', '$tanggal')")) {
+            if($this->db->simple_query("INSERT INTO `booking`(`id`, `id_tiket`, `nama`, `email`, `no_telp`, `created_date`)
+                VALUES ('$id', '$data[id_tiket]', '$data[nama]', '$data[email]', '$data[no_telp]', '$tanggal')")) {
                 $return['msg'][0] = "ok";
                 $return['msg'][1] = "Data berhasil ditambahkan.....";
             } else {
@@ -74,5 +75,10 @@ class Booking_model extends CI_Model {
         $sql = "SELECT tiket.band, COUNT(id_tiket) AS jml FROM `booking` JOIN `tiket` ON tiket.id = booking.id_tiket GROUP BY id_tiket";
         $query = $this->db->query($sql);
         return $query->result_array();
+    }
+
+    public function getTiketId($id='')
+    {
+        return $this->db->get_where('booking', ['id_tiket' => $id]);
     }
 }

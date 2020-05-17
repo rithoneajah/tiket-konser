@@ -1,4 +1,7 @@
+<?php 
+  $in = $this->session->flashdata('gagal');
 
+?>
 <div class="main-content">
   <div class="main-content-inner">
     <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -30,11 +33,14 @@
           <div class="clearfix">
             <div class="pull-right tableTools-container"></div>
           </div>
-
-          <div class="table-header">
-            Hasil untuk "Jenis Tiket"
-          </div>
-
+          <?php if ($in) : ?>
+            <div class="table-header" style="background-color: #f91504">
+              Data gagal dihapus, karena data sedang digunakan.
+            </div>
+          <?php endif;?>
+          <div class="table-header hide ajax-res" style="background-color: #f91504;">
+              Data gagal dihapus, karena data sedang digunakan.
+            </div>
           <!-- div.table-responsive -->
 
           <!-- div.dataTables_borderWrap -->
@@ -84,3 +90,4 @@
     Apakah Anda Yakin?
   </p>
 </div><!-- #dialog-confirm -->
+

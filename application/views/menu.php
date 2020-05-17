@@ -70,14 +70,14 @@
                         <b class="arrow"></b>
                         <ul class="submenu" style="display: block;">
                             <li class="">
-                                <a href="<?php echo base_url(); ?>tiket">
+                                <a href="<?php echo base_url('tiket'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Tiket Konser
                                 </a>
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="<?php echo base_url(); ?>tiket/detail">
+                                <a href="<?php echo base_url('tiket/detail'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Detail
                                 </a>
@@ -87,7 +87,7 @@
                     </li>
 
                     <li class="">
-                        <a href="<?php echo base_url(); ?>tiket/booking_list">
+                        <a href="<?php echo base_url('tiket/booking_list'); ?>">
                             <i class="menu-icon fa fa-ticket"></i>
                             <span class="menu-text"> Pemesanan </span>
                         </a>
@@ -105,7 +105,7 @@
                     </li>
                     
                     <li class="">
-                        <a href="<?php echo base_url(); ?>kontak/tentang">
+                        <a href="<?php echo base_url('kontak/tentang'); ?>">
                             <i class="menu-icon fa fa-user"></i>
                             <span class="menu-text"> Tentang Kami </span>
                         </a>

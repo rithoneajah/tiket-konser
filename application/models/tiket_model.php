@@ -11,8 +11,9 @@ class Tiket_model extends CI_Model {
     public function tambah($data)
     {
         if (!empty($data)) {
-            if($this->db->simple_query("INSERT INTO `tiket`(`type`, `band`, `image`, `harga`, `date`, `time`)
-                VALUES ('$data[type]', '$data[band]', '$data[image]', '$data[harga]', '$data[date]', '$data[time]')")) {
+            $id = hexdec(uniqid());
+            if($this->db->simple_query("INSERT INTO `tiket`(`id`, `type`, `band`, `image`, `harga`, `date`, `time`)
+                VALUES ('$id', '$data[type]', '$data[band]', '$data[image]', '$data[harga]', '$data[date]', '$data[time]')")) {
                 $return['msg'][0] = "ok";
                 $return['msg'][1] = "Data berhasil ditambahkan.....";
             } else {
@@ -89,5 +90,10 @@ class Tiket_model extends CI_Model {
     function hitung()
     {
         return $this->db->from("tiket")->count_all_results();
+    }
+
+    public function getTypeId($id='')
+    {
+        return $this->db->get_where('tiket', ['type' => $id]);
     }
 }
