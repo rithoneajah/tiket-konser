@@ -140,7 +140,7 @@ jQuery(function($) {
             html += '<tr>'+
                     '<td>'+(i+1)+'</td>'+
                     '<td>'+data[i].type+'</td>'+
-                    '<td><a href="<?php //echo site_url('tiket/type/')?>' + data[i].id + '" class="tooltip-success" data-rel="tooltip" title="Daftar Tiket" ><span class="blue">Daftar Tiket <i class="ace-icon fa fa-book bigger-120"></i></span></a></td>'+
+                    '<td><a href="<?php echo site_url('tiket/type/')?>' + data[i].id + '" class="tooltip-success" data-rel="tooltip" title="Daftar Tiket" ><span class="blue">Daftar Tiket <i class="ace-icon fa fa-book bigger-120"></i></span></a></td>'+
                     '<td><center>'+
                         '<a href="#" class="tooltip-success edit-data" data-rel="tooltip" title="Ubah"  data-type="'+data[i].type+'" data-id="'+data[i].id+'"><span class="green"><i class="ace-icon fa fa-pencil-square-o bigger-120"></i></span></a>'+' '+
                         '<a href="#" class="tooltip-error hapus-data" data-id="'+data[i].id+'" data-rel="tooltip" title="Hapus"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a>'+

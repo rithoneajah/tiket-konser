@@ -3,6 +3,12 @@
 <script src="<?php echo base_url('assets/js/jquery.dataTables.bootstrap.min.js');?>"></script>
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery-ui.min.css');?>" />
 <script src="<?php echo base_url('assets/js/jquery-ui.min.js');?>"></script>
+
+<script src="<?php echo base_url('assets/js/dataTables.buttons.min.js');?>"></script>
+<script src="<?php echo base_url('assets/js/dataTable/JSZip-2.5.0/jszip.min.js');?>"></script>
+<script src="<?php echo base_url('assets/js/dataTable/pdfmake-0.1.36/pdfmake.min.js');?>"></script>
+<script src="<?php echo base_url('assets/js/dataTable/pdfmake-0.1.36/vfs_fonts.js');?>"></script>
+<script src="<?php echo base_url('assets/js/buttons.html5.min.js');?>"></script>
 <div id="dialog-confirm" class="hide">
 
   <p class="bigger-110 bolder center grey">
@@ -12,6 +18,18 @@
 </div><!-- #dialog-confirm -->
 <script>
 $(document).ready(function() {
+  var buttonCommon = {
+    exportOptions: {
+      format: {
+        body: function ( data, row, column, node ) {
+          // Strip $ from salary column to make it numeric
+          return column === 5 ?
+              data.replace( /[$,]/g, '' ) :
+              data;
+        }
+      }
+    }
+  };
   var myTable =$('#dynamic-table').DataTable({
   "ajax": {
     type   : "POST",
@@ -27,6 +45,24 @@ $(document).ready(function() {
     select: {
         style: 'multi'
     },
+    dom: 'Bfrtip',
+    buttons: [
+        $.extend( true, {}, buttonCommon, {
+            extend: 'excelHtml5',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3, 4]
+            },
+            className: 'btn btn-info'
+        }),
+        $.extend( true, {}, buttonCommon, {
+            extend: 'pdfHtml5',
+            exportOptions: {
+                columns: [ 0, 1, 2, 3, 4]
+            },
+            className: 'btn btn-primary'
+        })
+    ],
+
     "initComplete" : function(setting, json) {
       $('.delete-data').on('click', function(e) {
         var link = $(this).attr('href');

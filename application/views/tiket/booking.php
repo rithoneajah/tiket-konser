@@ -30,9 +30,6 @@
           <div class="clearfix">
             <div class="pull-right tableTools-container"></div>
           </div>
-          <div class="table-header">
-            Hasil untuk "Booking"
-          </div>
 
           <!-- div.table-responsive -->
 
