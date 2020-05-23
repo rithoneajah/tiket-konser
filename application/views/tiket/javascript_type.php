@@ -1,5 +1,5 @@
 <script src="<?php echo base_url('assets/js/jquery.dataTables.min.js');?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.dataTables.bootstrap.min.js');?>"></script>
+<!-- <script src="<?php //echo base_url('assets/js/jquery.dataTables.bootstrap.min.js');?>"></script> -->
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery-ui.min.css');?>" />
 <script src="<?php echo base_url('assets/js/jquery-ui.min.js');?>"></script>
 <div id="dialog-confirm" class="hide">
@@ -16,22 +16,67 @@ jQuery(function($) {
     console.log('washyu');
   });
   $(document).ready(function() {
+
     show_data();
-    var myTable =$('#dynamic-table').DataTable({
+
+    /*var buttonCommon = {
+      exportOptions: {
+        format: {
+          body: function ( data, row, column, node ) {
+            // Strip $ from salary column to make it numeric
+            return column === 5 ?
+                data.replace( /[$,]/g, '' ) :
+                data;
+          }
+        }
+      }
+    };*/
+
+    var myTable = $('#dynamic-table').DataTable({
       /*"ajax": {
         type   : "POST",
-        url    : "<?php echo base_url(); ?>tiket/daftar_type/",
+        url    : "<?php //echo site_url('tiket/daftar_type')?>",
         data   : function(d) {
-            
+            console.log(d);
         }
       },*/
+
       "columnDefs": [
-        { "orderable": false, "targets": 2 },
-        { "visible": true, "targets": [3], "searchable": false }
+        {
+          "orderable": false,
+          "targets": 2
+        },
+        {
+          "visible": true,
+          "targets": [1],
+          "searchable": true
+        }
       ],
+
+      // dom: 'Bfrtip',
+
       select: {
           style: 'multi'
       },
+
+      // buttons: ['excel','pdf'],
+      // buttons: [
+      //     $.extend( true, {}, buttonCommon, {
+      //         extend: 'excelHtml5',
+      //         exportOptions: {
+      //             columns: [ 0, 1]
+      //         },
+      //         className: 'btn btn-info'
+      //     }),
+      //     $.extend( true, {}, buttonCommon, {
+      //         extend: 'pdfHtml5',
+      //         exportOptions: {
+      //             columns: [ 0, 1]
+      //         },
+      //         className: 'btn btn-primary'
+      //     })
+      // ],
+
       "initComplete" : function(setting, json) {
         $('.delete-data').on('click', function(e) {
           var link = $(this).attr('href');
@@ -47,9 +92,25 @@ jQuery(function($) {
                 html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Hapus",
                 "class" : "btn btn-danger btn-minier",
                 click: function() {
-                  console.log(link);
+                  /*console.log(link);
                   $( this ).dialog( "close" );
-                  window.location.href = link;
+                  window.location.href = link;*/
+                  $.ajax({
+                    type : "GET",
+                    /*url  : "<?php //echo site_url('tiket/delete_type')?>",*/
+                    url  : link,
+                    dataType : "JSON",
+                    // data : {id:id},
+                    success: function(data){
+                      console.log(data);
+                      if (data == false) {
+                        $('.ajax-res').removeClass('hide');
+                      }
+                      show_data();
+                    }
+                  });
+                  $( this ).dialog( "close" );
+                  return false;
                 }
               }
               ,
@@ -79,7 +140,7 @@ jQuery(function($) {
             html += '<tr>'+
                     '<td>'+(i+1)+'</td>'+
                     '<td>'+data[i].type+'</td>'+
-                    '<td><a href="<?php echo site_url('tiket/type/')?>' + data[i].id + '" class="tooltip-success" data-rel="tooltip" title="Daftar Tiket" ><span class="blue">Daftar Tiket <i class="ace-icon fa fa-book bigger-120"></i></span></a></td>'+
+                    '<td><a href="<?php //echo site_url('tiket/type/')?>' + data[i].id + '" class="tooltip-success" data-rel="tooltip" title="Daftar Tiket" ><span class="blue">Daftar Tiket <i class="ace-icon fa fa-book bigger-120"></i></span></a></td>'+
                     '<td><center>'+
                         '<a href="#" class="tooltip-success edit-data" data-rel="tooltip" title="Ubah"  data-type="'+data[i].type+'" data-id="'+data[i].id+'"><span class="green"><i class="ace-icon fa fa-pencil-square-o bigger-120"></i></span></a>'+' '+
                         '<a href="#" class="tooltip-error hapus-data" data-id="'+data[i].id+'" data-rel="tooltip" title="Hapus"><span class="red"><i class="ace-icon fa fa-trash-o bigger-120"></i></span></a>'+
@@ -137,6 +198,116 @@ jQuery(function($) {
   });
 
   $( document ).ajaxComplete(function() {
+
+      /*var buttonCommon = {
+        exportOptions: {
+          format: {
+            body: function ( data, row, column, node ) {
+              // Strip $ from salary column to make it numeric
+              return column === 5 ?
+                  data.replace( /[$,]/g, '' ) :
+                  data;
+            }
+          }
+        }
+      };*/
+
+      var myTable = $('#dynamic-table').DataTable({
+        /*"ajax": {
+          type   : "POST",
+          url    : "<?php //echo site_url('tiket/daftar_type')?>",
+          data   : function(d) {
+              console.log(d);
+          }
+        },*/
+
+        "columnDefs": [
+          {
+            "orderable": false,
+            "targets": 2
+          },
+          {
+            "visible": true,
+            "targets": [1],
+            "searchable": true
+          }
+        ],
+
+        // dom: 'Bfrtip',
+
+        select: {
+            style: 'multi'
+        },
+
+        // buttons: ['excel','pdf'],
+        /*buttons: [
+            $.extend( true, {}, buttonCommon, {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0, 1]
+                },
+                className: 'btn btn-info'
+            }),
+            $.extend( true, {}, buttonCommon, {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1]
+                },
+                className: 'btn btn-primary'
+            })
+        ],*/
+
+        "initComplete" : function(setting, json) {
+          $('.delete-data').on('click', function(e) {
+            var link = $(this).attr('href');
+            e.preventDefault();
+            $( "#dialog-confirm" ).removeClass('hide').dialog({
+              resizable: false,
+              width: '320',
+              modal: true,
+              title: "Konfirmasi",
+              title_html: true,
+              buttons: [
+                {
+                  html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Hapus",
+                  "class" : "btn btn-danger btn-minier",
+                  click: function() {
+                    console.log(link);
+                    /*$( this ).dialog( "close" );
+                    window.location.href = link;*/
+                    $.ajax({
+                      type : "GET",
+                      /*url  : "<?php //echo site_url('tiket/delete_type')?>",*/
+                      url  : link,
+                      dataType : "JSON",
+                      // data : {id:id},
+                      success: function(data){
+                        console.log(data);
+                        if (data == false) {
+                          $('.ajax-res').removeClass('hide');
+                        }
+                        show_data();
+                      }
+                    });
+                    $( this ).dialog( "close" );
+                    return false;
+                  }
+                }
+                ,
+                {
+                  html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Jangan",
+                  "class" : "btn btn-minier",
+                  click: function() {
+                    $( this ).dialog( "close" );
+                  }
+                }
+              ]
+            });
+          });
+        }
+      });
+    
+
     function show_data() {
       $.ajax({
         type  : 'get',
@@ -188,7 +359,6 @@ jQuery(function($) {
                     if (data == false) {
                       $('.ajax-res').removeClass('hide');
                     }
-
                     show_data();
                   }
                 });

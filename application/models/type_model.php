@@ -46,6 +46,7 @@ class Type_model extends CI_Model {
         }*/
 
         return $groupproduct->result();
+        // return $data;
     }
 
     function getById($id){

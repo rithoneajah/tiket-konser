@@ -208,7 +208,7 @@ class Tiket extends CI_Controller {
     public function tambah_booking()
     {
         $nimNama = 'Ridwan Ardiansyah - 41516120063';
-        $tiket = $this->db->get('tiket')->result();
+        $tiket = $this->tiket_model->listTiket()->result();
 
         $this->load->view('header', ['user' => $nimNama]);
         $this->load->view('menu');
@@ -342,6 +342,7 @@ class Tiket extends CI_Controller {
         } else {
             $delete = false;
         }
+
         echo json_encode($delete);
     }
 

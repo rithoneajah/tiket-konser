@@ -96,4 +96,10 @@ class Tiket_model extends CI_Model {
     {
         return $this->db->get_where('tiket', ['type' => $id]);
     }
+
+    public function listTiket()
+    {
+        $tiket = $this->db->query("SELECT tiket.id, type.type, band, image, harga, `date`, `time` FROM tiket LEFT JOIN type ON type.id = tiket.type");
+        return $tiket;
+    }
 }
