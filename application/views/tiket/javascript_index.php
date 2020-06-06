@@ -29,7 +29,7 @@ $(document).ready(function() {
       }
     }
   };
-  var myTable =$('#dynamic-table').DataTable({
+  var myTable = $('#dynamic-table').DataTable({
     "ajax": {
       type   : "POST",
       url    : "<?php echo base_url(); ?>tiket/tiket_type/<?=$data;?>",

@@ -29,9 +29,9 @@ class Type_model extends CI_Model {
 
     public function getData()
     {
-        $i = 1;
+        // $i = 1;
         $groupproduct = $this->db->query("SELECT * FROM type");
-        $data = [];
+        // $data = [];
         /*foreach($groupproduct->result() as $rowa) {
             $akses = "<center><a href='".base_url().'tiket/edit_type/'.$rowa->id."' class='tooltip-success' data-rel='tooltip' title='Ubah' ><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a>  <a href='".base_url().'tiket/delete_type/'.$rowa->id."' class='tooltip-error delete-data' data-rel='tooltip' title='Hapus' ><span class='red'><i class='ace-icon fa fa-trash-o bigger-120'></i></span></a></center>";
 
